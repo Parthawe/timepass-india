@@ -28,3 +28,9 @@ No copied images, source code, brand identity, or unsupported cultural/factual c
 
 ## Later releases
 Train booking puzzle, Indian language wordplay, a sourced India scale explainer, a city map challenge, a spice-combination sandbox, and an escalating form puzzle. These need separate design/data work; none appears as a playable tile until implemented.
+
+## Release 1.1
+
+Add three original experiences to the existing shelf without changing its visual system. Seat, Please has five solvable, fictional train-seat puzzles. Masala Lab has eight starting ingredients and 21 discoverable combinations. Society Pass reveals ten cumulative rules for an invented visitor message.
+
+Ship a deterministic build with content-hashed JavaScript and CSS, including dependency hashes, to keep returning visitors on matching assets. Preserve existing local scores; extend the About & data clearing control to cover kitchen discoveries. Test the new rules and build behavior, check desktop and phone rendering, then publish through the existing Pages workflow.

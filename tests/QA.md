@@ -16,3 +16,7 @@ Check the shelf, filters, surprise button, direct hashes, all-game links, copy l
 Edge cases: navigate away during a mismatch timeout and an animation; unknown hash; storage unavailable; empty drawing; overspending; repeated purchase; reloading a deep link.
 
 Engine tests cover monetary conservation and boundaries, board events, drawing scoring, shot scoring, offers and shuffling. Browser tests cover rendered controls and session flow. Visual checks cover the shelf and representative games at desktop and mobile sizes.
+
+## Release 1.1 checks
+
+Seat, Please: select, place, swap, reserved seats, invalid allocation, hint, all five solutions, reset and completion. Masala Lab: mixing, failed mix, repeat discovery, all 21 results, persistence, corrupted saves, hints and reset. Society Pass: cumulative reveals, earlier-rule regression, whole-word matching, hints, submit and restart. Check all three at desktop and 320px phone width. Confirm the built page loads hashed modules and every emitted dependency exists; verify the live release manifest against the local build.

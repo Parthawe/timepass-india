@@ -1,7 +1,7 @@
 import http from "node:http";
 import { readFile } from "node:fs/promises";
 import { resolve, extname } from "node:path";
-const root = resolve("dist");
+const root = resolve(process.argv.includes("--built") ? "_site" : "dist");
 const mime = {
   ".html": "text/html",
   ".js": "text/javascript",

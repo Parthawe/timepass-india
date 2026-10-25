@@ -13,6 +13,7 @@ import {
   shuffled,
 } from "./engine.js";
 import { svg, cup, icon, food, scene } from "./art.js";
+import { createMoreGames } from "./more-games.js";
 const app = document.querySelector("#app");
 document.querySelector(".skip").addEventListener("click", (e) => {
   e.preventDefault();
@@ -24,6 +25,27 @@ document.querySelector(".skip").addEventListener("click", (e) => {
   }
 });
 const games = [
+  {
+    id: "seats",
+    name: "Seat, Please",
+    desc: "Four passengers. Very specific requests.",
+    time: "5 min",
+    group: "quick",
+  },
+  {
+    id: "masala",
+    name: "Masala Lab",
+    desc: "A kitchen full of what happens if.",
+    time: "At your pace",
+    group: "slow",
+  },
+  {
+    id: "society",
+    name: "Society Pass",
+    desc: "The form has one more requirement.",
+    time: "3 min",
+    group: "quick",
+  },
   {
     id: "city",
     name: "City Tycoon",
@@ -855,20 +877,31 @@ function train() {
 }
 function about() {
   document.title = "About & data • Timepass";
-  app.innerHTML = `<div class="shell"><header class="game-nav"><a class="back" href="#/">${icon("back")}All games</a><a class="tiny-logo" href="#/">timepass.</a></header><main class="about" id="main"><h1>A little timepass.</h1><p>Chai orders, gully cricket, bazaar negotiations, a slightly wonky roti. This is a small collection of games built around familiar Indian moments.</p><p>Inspired by <a href="https://neal.fun/" target="_blank" rel="noopener">Neal.fun</a> and the joy of opening a website just to play with something. Timepass is an independent project, with original artwork and code.</p><h2>Eight things to play with</h2><p>Every tile opens a working game or toy. City Tycoon is an original short property game against a computer. All property values, shopping prices, tips and bazaar deals are fictional. Train Window is an imagined landscape.</p><h2>What stays in your browser</h2><p>The app saves only your best cricket, memory and roti scores in local storage on this device. These scores are not sent to an app server. To erase them, use the button below or clear this site's browser data. Current game sessions reset when you reload.</p><button id="clear-data">Clear saved scores</button><p id="clear-status" role="status"></p><h2>Hosting & data</h2><p>The app has no accounts, analytics, advertising, payments or third-party API calls. Fonts and graphics are served with the site. GitHub Pages serves the site and may process request information under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub’s privacy statement</a>. Copy game link uses your browser's clipboard when you click it.</p><h2>Built to tinker with</h2><p>View the project, the build plan and the reference review <a href="https://github.com/Parthawe/timepass-india" target="_blank" rel="noopener">on GitHub</a>. No affiliation with Neal.fun or Monopoly.</p></main>${footer()}</div>`;
+  app.innerHTML = `<div class="shell"><header class="game-nav"><a class="back" href="#/">${icon("back")}All games</a><a class="tiny-logo" href="#/">timepass.</a></header><main class="about" id="main"><h1>A little timepass.</h1><p>Chai orders, gully cricket, bazaar negotiations, a slightly wonky roti. This is a small collection of games built around familiar Indian moments.</p><p>Inspired by <a href="https://neal.fun/" target="_blank" rel="noopener">Neal.fun</a> and the joy of opening a website just to play with something. Timepass is an independent project, with original artwork and code.</p><h2>Eleven things to play with</h2><p>Every tile opens a working game or toy. City Tycoon is an original short property game against a computer. All property values, shopping prices, tips and bazaar deals are fictional. Train Window is an imagined landscape. Seat, Please uses an invented coach layout. Masala Lab combinations are playful game logic, not cooking instructions. Society Pass is a fictional form; it sends nothing.</p><h2>What stays in your browser</h2><p>The app saves your best cricket, memory and roti scores, plus your Masala Lab discoveries, in local storage on this device. These scores are not sent to an app server. To erase them, use the button below or clear this site's browser data. Current game sessions reset when you reload.</p><button id="clear-data">Clear scores & discoveries</button><p id="clear-status" role="status"></p><h2>Hosting & data</h2><p>The app has no accounts, analytics, advertising, payments or third-party API calls. Fonts and graphics are served with the site. GitHub Pages serves the site and may process request information under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub’s privacy statement</a>. Copy game link uses your browser's clipboard when you click it.</p><h2>Built to tinker with</h2><p>View the project, the build plan and the reference review <a href="https://github.com/Parthawe/timepass-india" target="_blank" rel="noopener">on GitHub</a>. No affiliation with Neal.fun or Monopoly.</p></main>${footer()}</div>`;
   on("clear-data", () => {
     try {
-      ["cricket", "dabba", "roti", "roti-timing"].forEach((k) =>
+      ["cricket", "dabba", "roti", "roti-timing", "masala"].forEach((k) =>
         localStorage.removeItem("timepass-" + k),
       );
-      $("#clear-status").textContent = "Saved scores cleared on this device.";
+      $("#clear-status").textContent =
+        "Saved scores and discoveries cleared on this device.";
     } catch {
       $("#clear-status").textContent =
         "Browser storage is unavailable. You can clear site data in browser settings.";
     }
   });
 }
-const setup = { spend, cricket, chai, bargain, dabba, city, roti, train };
+const setup = {
+  spend,
+  cricket,
+  chai,
+  bargain,
+  dabba,
+  city,
+  roti,
+  train,
+  ...createMoreGames({ mount, on, $ }),
+};
 function route() {
   cleanup();
   cleanup = () => {};
@@ -884,6 +917,12 @@ function route() {
       document.title = "Game not found • Timepass";
     } else {
       const rules = {
+        seats:
+          "Seat four passengers without upsetting anyone. Read their requests, choose a passenger, then choose a seat.",
+        masala:
+          "Combine two things. Discover something new. Put it back in the bowl.",
+        society:
+          "You only wanted to visit a friend. The visitor desk would like a word. And then several more.",
         city: "Build a little property empire against the computer. Sixteen rounds. Highest net worth wins.",
         spend:
           "You have one crore rupees to spend. Buy, sell, and see how far it goes.",
@@ -899,7 +938,15 @@ function route() {
       gameShell(
         g,
         rules[id],
-        ["cricket", "chai", "bargain", "dabba", "roti"].includes(id),
+        [
+          "cricket",
+          "chai",
+          "bargain",
+          "dabba",
+          "roti",
+          "masala",
+          "society",
+        ].includes(id),
       );
       cleanup = setup[id]();
     }
