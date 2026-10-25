@@ -39,3 +39,5 @@ Pushes to `main` run syntax checks and tests, build content-hashed assets, then 
 Bricolage Grotesque is distributed under the SIL Open Font License; see `dist/assets/OFL-Bricolage.txt`. This project is independent of Neal.fun and Monopoly.
 
 Release 1.1 adds five seat puzzles, 21 kitchen discoveries and a ten-rule visitor-pass puzzle. New modules are in `dist/more-engine.js` and `dist/more-games.js`.
+
+Release 1.2 improves the existing games: animated cricket with pause/resume, gentle pace, repeatable daily overs and score copying; bulk shopping and buy-max; personal records on the shelf; and recommendations after every game. Daily scores use the device's calendar date and stay in local storage for at most thirty dates. See `tests/RELEASE-1.2.md` for verification.

@@ -17,7 +17,7 @@ A Neal.fun-inspired collection of small games and playful interactive experience
 The user explicitly chose Neal.fun as the reference: a straightforward illustrated game shelf with immediate play. Original name, graphics, copy, and game implementations. Working name: Timepass. Confirmed language: English with light Hinglish.
 
 ## Capabilities and Constraints
-Eleven experiences as of release 1.1; browser-only play; no accounts, payments, analytics, or server API. Game prices and property values are fictional. City Tycoon is a short original property game. No claim of affiliation with Neal Agarwal or Monopoly.
+Eleven experiences as of release 1.2; browser-only play; no accounts, payments, analytics, or server API. Daily cricket uses the device calendar date, deterministic deliveries and local personal records. Game prices and property values are fictional. City Tycoon is a short original property game. No claim of affiliation with Neal Agarwal or Monopoly.
 
 ## Evidence on Hand
 The current Neal.fun catalog was read from its rendered home page on 2026-10-23. Existing Terms Apply deployment confirms the user's GitHub Pages pattern. No user-supplied branding or licensed illustrations.

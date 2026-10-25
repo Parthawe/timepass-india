@@ -20,3 +20,7 @@ Engine tests cover monetary conservation and boundaries, board events, drawing s
 ## Release 1.1 checks
 
 Seat, Please: select, place, swap, reserved seats, invalid allocation, hint, all five solutions, reset and completion. Masala Lab: mixing, failed mix, repeat discovery, all 21 results, persistence, corrupted saves, hints and reset. Society Pass: cumulative reveals, earlier-rule regression, whole-word matching, hints, submit and restart. Check all three at desktop and 320px phone width. Confirm the built page loads hashed modules and every emitted dependency exists; verify the live release manifest against the local build.
+
+## Release 1.2 checks
+
+Complete and retry a daily over; pause/resume a delivery; leave a ball unplayed; use keyboard input and gentle pace; test reduced motion; copy a dated score link; clear daily records. Buy and sell batches, buy the maximum affordable quantity, exhaust the budget and display a large quantity on a phone. Return from a low shelf tile and the daily strip to verify scroll and focus restoration. Open the recommended games. Check the field and primary cricket action together at a short desktop and a narrow phone size.

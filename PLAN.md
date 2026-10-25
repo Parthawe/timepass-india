@@ -34,3 +34,7 @@ Train booking puzzle, Indian language wordplay, a sourced India scale explainer,
 Add three original experiences to the existing shelf without changing its visual system. Seat, Please has five solvable, fictional train-seat puzzles. Masala Lab has eight starting ingredients and 21 discoverable combinations. Society Pass reveals ten cumulative rules for an invented visitor message.
 
 Ship a deterministic build with content-hashed JavaScript and CSS, including dependency hashes, to keep returning visitors on matching assets. Preserve existing local scores; extend the About & data clearing control to cover kitchen discoveries. Test the new rules and build behavior, check desktop and phone rendering, then publish through the existing Pages workflow.
+
+## Release 1.2
+
+Improve the existing collection rather than add more tiles. Rebuild Gully Cricket with visible deliveries, bat and ball feedback, pause/resume, gentle practice pace, a reproducible daily over and local score sharing. Add bulk purchases and buy-max to Spend a Crore. Keep browsing context when returning to the shelf, show personal records from actual local scores, and connect every game to two other experiences. Preserve existing scores and the illustrated visual system.

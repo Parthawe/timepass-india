@@ -5,3 +5,5 @@ User-pinned reference: Neal.fun, played straight as an illustrated game shelf. N
 A light paper surface suits casual daytime phone and laptop use. Dark ink, clear type, and original geometric illustrations. The game tiles use separate scene palettes because each is a distinct world, with shared borders and labeling. Bricolage Grotesque supplies the slightly irregular, compact display lettering; the body uses the same family for continuity. Self-host font files.
 
 The shelf uses three columns on wide screens, two on tablets, one on phones. Games have a consistent back link, visible rules, status and reset. Reduced motion stops decorative motion; Train Window also has explicit pause. Keyboard play is supported by native controls; Perfect Roti offers a keyboard timing alternative. No marketing sections, testimonials, signup, or fake counters.
+
+Release 1.2 adds one flat daily cricket strip to the shelf and two compact game links below each experience. Cricket ball and bat motion explains timing and results; shots are initiated by the player. Result motion respects reduced-motion preferences. The gallery retains its original illustrations and structure.
