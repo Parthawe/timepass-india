@@ -10,7 +10,7 @@ import {
   bargainOffer,
   shuffled,
 } from "./engine.js";
-import { svg, cup, icon, food, scene } from "./art.js";
+import { svg, cup, icon, food } from "./art.js";
 import { createMoreGames } from "./more-games.js";
 import {
   createCricket,
@@ -142,7 +142,7 @@ function best(key, value, lower = false) {
   }
 }
 const footer = () =>
-  `<footer><span>Made for a little timepass.</span><div><a href="#/about">About & data</a><a href="https://github.com/Parthawe/timepass-india" target="_blank" rel="noopener">Source on GitHub</a></div></footer>`;
+  `<footer><span>Timepass · Games and experiments</span><div><a href="#/about">About & data</a><a href="https://github.com/Parthawe/timepass-india" target="_blank" rel="noopener">Source on GitHub</a></div></footer>`;
 function personalRecord(id) {
   const specs = {
     cricket: ["cricket", "runs"],
@@ -163,11 +163,11 @@ function personalRecord(id) {
 }
 function dailyBanner() {
   const day = dayKey(),
-    records = readDaily(),
-    record = Object.hasOwn(records, day)
-      ? `Best today: ${records[day]} / 36`
-      : `Target: ${dailyTarget} runs from six balls`;
-  return `<a id="daily-challenge" class="daily-banner" href="#/cricket?mode=daily&day=${day}"><span class="daily-bat" aria-hidden="true">${svg('<path d="m11 4 6 5-9 14-6-5Z" fill="#e4c38b" stroke="currentColor" stroke-width="1.5"/><path d="m17 9 5-7" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="25" cy="23" r="4" fill="#b14b35" stroke="currentColor" stroke-width="1.5"/>', "0 0 32 32")}</span><span><strong>Today’s over</strong><span>${dailyLabel(day)} · ${record}</span></span><span class="daily-cta">Play the challenge ${icon("arrow")}</span></a>`;
+    records = readDaily();
+  const record = Object.hasOwn(records, day)
+    ? `Your best today: ${records[day]} / 36`
+    : `Six balls. Target ${dailyTarget} runs.`;
+  return `<a id="daily-challenge" class="daily-banner" href="#/cricket?mode=daily&day=${day}"><span><strong>Daily cricket</strong><span>${dailyLabel(day)} · ${record}</span></span><span class="daily-cta">Play today’s over ${icon("arrow")}</span></a>`;
 }
 const recommendations = {
   cricket: ["roti", "dabba"],
@@ -183,26 +183,26 @@ const recommendations = {
   bargain: ["spend", "society"],
 };
 function keepPlaying(id) {
-  return `<section class="keep-playing" aria-label="More games"><h2>One more?</h2><div class="next-games">${(
+  return `<section class="keep-playing" aria-label="More games"><h2>More to play</h2><div class="next-games">${(
     recommendations[id] || []
   )
     .map((next) => {
       const g = games.find((g) => g.id === next);
-      return `<a href="#/${g.id}" class="next-game"><span class="next-thumb">${scene(g.id)}</span><span><strong>${g.name}</strong><span>${g.desc}</span></span>${icon("arrow")}</a>`;
+      return `<a href="#/${g.id}" class="next-game"><span><strong>${g.name}</strong><span>${g.desc}</span></span>${icon("arrow")}</a>`;
     })
     .join(
       "",
     )}</div><a class="browse-games" href="#/">Browse all eleven games</a></section>`;
 }
 function home() {
-  document.title = "Timepass • Little Indian distractions";
-  app.innerHTML = `<div class="shell"><header class="topbar"><span class="note">Small games. Familiar things.</span><nav><a href="#/about">What is this?</a><span>Est. 2026</span></nav></header><main id="main"><div class="masthead"><h1 class="wordmark">timepass<span class="period">.</span><span class="cup-mark">${cup()}</span></h1><p>Little Indian distractions for your next five-minute break.</p></div>${dailyBanner()}<div class="shelf-head"><div class="filters" aria-label="Filter games"><button id="all" aria-pressed="${filter === "all"}">Everything</button><button id="quick" aria-pressed="${filter === "quick"}">Quick play</button><button id="slow" aria-pressed="${filter === "slow"}">Take it slow</button></div><button class="random" id="random">${icon("shuffle")}Surprise me</button></div><div class="games" id="games"></div><div class="endnote"><p>Made for chai breaks and window seats.</p><span class="scribble">Bas, one more.</span></div></main>${footer()}</div>`;
+  document.title = "Timepass · Games and experiments";
+  app.innerHTML = `<div class="shell"><header class="topbar"><a class="site-name" href="#/">Timepass</a><nav><a href="#/about">About</a><a href="https://github.com/Parthawe/timepass-india" target="_blank" rel="noopener">Source</a></nav></header><main id="main"><div class="masthead"><h1 class="wordmark">A little timepass.</h1><p>Small games and experiments from everyday India.</p></div>${dailyBanner()}<div class="shelf-head"><div class="filters" aria-label="Filter games"><button id="all" aria-pressed="${filter === "all"}">All games</button><button id="quick" aria-pressed="${filter === "quick"}">Quick play</button><button id="slow" aria-pressed="${filter === "slow"}">Take your time</button></div><button class="random" id="random">Choose for me</button></div><div class="games" id="games"></div></main>${footer()}</div>`;
   const draw = () => {
     $("#games").innerHTML = games
       .filter((g) => filter === "all" || g.group === filter)
       .map(
         (g) =>
-          `<a href="#/${g.id}" class="game-card"><div class="tile">${scene(g.id)}</div><div class="card-label"><h2>${g.name}</h2><span>${g.time}</span></div><p class="card-desc">${g.desc}</p>${personalRecord(g.id)}</a>`,
+          `<a href="#/${g.id}" class="game-card"><div class="tile"><img src="./assets/previews/${g.id}-1.3.webp" width="720" height="450" alt="" loading="lazy" decoding="async"></div><div class="card-label"><h2>${g.name}</h2><span>${g.time}</span></div><p class="card-desc">${g.desc}</p>${personalRecord(g.id)}</a>`,
       )
       .join("");
   };
@@ -224,7 +224,7 @@ function home() {
   });
 }
 function gameShell(g, desc, narrow = false) {
-  app.innerHTML = `<div class="shell"><header class="game-nav"><a class="back" href="#/">${icon("back")}All games</a><a class="tiny-logo" href="#/">timepass.</a><button id="share" class="small">Copy game link</button></header><main id="main"><div class="share-status" id="share-status" role="status"></div><header class="game-header"><h1>${g.name}</h1><p>${desc}</p></header><div class="game-stage ${narrow ? "narrow" : ""}" id="stage"></div>${keepPlaying(g.id)}</main>${footer()}</div>`;
+  app.innerHTML = `<div class="shell"><header class="game-nav"><a class="back" href="#/">${icon("back")}All games</a><a class="tiny-logo" href="#/">Timepass</a><button id="share" class="small">Copy game link</button></header><main id="main"><div class="share-status" id="share-status" role="status"></div><header class="game-header"><h1>${g.name}</h1><p>${desc}</p></header><div class="game-stage ${narrow ? "narrow" : ""}" id="stage"></div>${keepPlaying(g.id)}</main>${footer()}</div>`;
   document.title = g.name + " • Timepass";
   on("share", async () => {
     try {
@@ -423,7 +423,7 @@ function bargain() {
   const render = () => {
     const item = stock[index];
     mount(
-      `<div class="status"><span><span class="muted">YOUR BUDGET</span><br><strong>${rupees(balance)}</strong></span><span class="muted">Saved ${rupees(saved)}<br>${index < 3 ? "Stall " + (index + 1) + " of 3" : "Bazaar complete"}</span></div>${index === 3 ? `<div class="result"><h2>${receipt.length ? "Good bargaining, boss." : "Window shopping counts."}</h2><p>${receipt.length} purchases. ${rupees(saved)} below the original asking prices.</p>${receipt.map((r) => `<p>${r.name}: ${rupees(r.price)}</p>`).join("")}<button id="reset">Another trip to the bazaar</button></div>` : `<div class="panel"><div class="market-scene">${scene("bargain")}</div><h2 class="bargain-quote">${item.name} · ${rupees(ask)}</h2><p class="muted" style="text-align:center">${attempts} of 3 offers used. The seller has a hidden minimum.</p><p class="feedback" role="status">${note}</p>${done ? `<div class="actions"><button class="primary" id="next">${index === 2 ? "Leave the bazaar" : "Next stall"}</button></div>` : `${attempts < 3 ? `<form id="offer-form"><label class="offer-label" for="offer">Your offer in rupees</label><div class="offer-row"><span>₹</span><input id="offer" type="number" min="10" max="${Math.min(ask, balance)}" step="10" value="${Math.min(balance, Math.round((ask * 0.6) / 10) * 10)}" required aria-describedby="offer-help"><button class="primary" type="submit">Make offer</button></div><p id="offer-help" class="fineprint">Up to ${rupees(Math.min(ask, balance))}, in ₹10 steps.</p></form>` : '<p class="muted" style="text-align:center">No more counteroffers. Take it or leave it.</p>'}<div class="actions"><button id="accept" ${balance < ask ? "disabled" : ""}>Pay ${rupees(ask)}</button><button id="walk">Walk away</button></div>`}</div>`}<p class="fineprint">Fictional stalls and prices. Sellers get a different minimum each game.</p>`,
+      `<div class="status"><span><span class="muted">YOUR BUDGET</span><br><strong>${rupees(balance)}</strong></span><span class="muted">Saved ${rupees(saved)}<br>${index < 3 ? "Stall " + (index + 1) + " of 3" : "Bazaar complete"}</span></div>${index === 3 ? `<div class="result"><h2>${receipt.length ? "Good bargaining, boss." : "Window shopping counts."}</h2><p>${receipt.length} purchases. ${rupees(saved)} below the original asking prices.</p>${receipt.map((r) => `<p>${r.name}: ${rupees(r.price)}</p>`).join("")}<button id="reset">Another trip to the bazaar</button></div>` : `<div class="panel"><h2 class="bargain-quote">${item.name} · ${rupees(ask)}</h2><p class="muted" style="text-align:center">${attempts} of 3 offers used. The seller has a hidden minimum.</p><p class="feedback" role="status">${note}</p>${done ? `<div class="actions"><button class="primary" id="next">${index === 2 ? "Leave the bazaar" : "Next stall"}</button></div>` : `${attempts < 3 ? `<form id="offer-form"><label class="offer-label" for="offer">Your offer in rupees</label><div class="offer-row"><span>₹</span><input id="offer" type="number" min="10" max="${Math.min(ask, balance)}" step="10" value="${Math.min(balance, Math.round((ask * 0.6) / 10) * 10)}" required aria-describedby="offer-help"><button class="primary" type="submit">Make offer</button></div><p id="offer-help" class="fineprint">Up to ${rupees(Math.min(ask, balance))}, in ₹10 steps.</p></form>` : '<p class="muted" style="text-align:center">No more counteroffers. Take it or leave it.</p>'}<div class="actions"><button id="accept" ${balance < ask ? "disabled" : ""}>Pay ${rupees(ask)}</button><button id="walk">Walk away</button></div>`}</div>`}<p class="fineprint">Fictional stalls and prices. Sellers get a different minimum each game.</p>`,
     );
     on(
       "offer-form",
@@ -914,7 +914,7 @@ function train() {
 }
 function about() {
   document.title = "About & data • Timepass";
-  app.innerHTML = `<div class="shell"><header class="game-nav"><a class="back" href="#/">${icon("back")}All games</a><a class="tiny-logo" href="#/">timepass.</a></header><main class="about" id="main"><h1>A little timepass.</h1><p>Chai orders, gully cricket, bazaar negotiations, a slightly wonky roti. This is a small collection of games built around familiar Indian moments.</p><p>Inspired by <a href="https://neal.fun/" target="_blank" rel="noopener">Neal.fun</a> and the joy of opening a website just to play with something. Timepass is an independent project, with original artwork and code.</p><h2>Eleven things to play with</h2><p>Every tile opens a working game or toy. City Tycoon is an original short property game against a computer. All property values, shopping prices, tips and bazaar deals are fictional. Train Window is an imagined landscape. Seat, Please uses an invented coach layout. Masala Lab combinations are playful game logic, not cooking instructions. Society Pass is a fictional form; it sends nothing.</p><h2>What stays in your browser</h2><p>The app saves your best cricket, memory and roti scores, daily cricket scores for up to 30 dates, plus your Masala Lab discoveries, in local storage on this device. These scores are not sent to an app server. To erase them, use the button below or clear this site's browser data. Current game sessions reset when you reload.</p><button id="clear-data">Clear scores & discoveries</button><p id="clear-status" role="status"></p><h2>Hosting & data</h2><p>The app has no accounts, analytics, advertising, payments or third-party API calls. Fonts and graphics are served with the site. GitHub Pages serves the site and may process request information under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub’s privacy statement</a>. Copy game link uses your browser's clipboard when you click it.</p><h2>Built to tinker with</h2><p>View the project, the build plan and the reference review <a href="https://github.com/Parthawe/timepass-india" target="_blank" rel="noopener">on GitHub</a>. No affiliation with Neal.fun or Monopoly.</p></main>${footer()}</div>`;
+  app.innerHTML = `<div class="shell"><header class="game-nav"><a class="back" href="#/">${icon("back")}All games</a><a class="tiny-logo" href="#/">Timepass</a></header><main class="about" id="main"><h1>A little timepass.</h1><p>Chai orders, gully cricket, bazaar negotiations, a slightly wonky roti. This is a small collection of games built around familiar Indian moments.</p><p>Inspired by <a href="https://neal.fun/" target="_blank" rel="noopener">Neal.fun</a> and the joy of opening a website just to play with something. Timepass is an independent project, with original artwork and code.</p><h2>Eleven things to play with</h2><p>Every tile opens a working game or toy. City Tycoon is an original short property game against a computer. All property values, shopping prices, tips and bazaar deals are fictional. Train Window is an imagined landscape. Seat, Please uses an invented coach layout. Masala Lab combinations are playful game logic, not cooking instructions. Society Pass is a fictional form; it sends nothing.</p><h2>What stays in your browser</h2><p>The app saves your best cricket, memory and roti scores, daily cricket scores for up to 30 dates, plus your Masala Lab discoveries, in local storage on this device. These scores are not sent to an app server. To erase them, use the button below or clear this site's browser data. Current game sessions reset when you reload.</p><button id="clear-data">Clear scores & discoveries</button><p id="clear-status" role="status"></p><h2>Hosting & data</h2><p>The app has no accounts, analytics, advertising, payments or third-party API calls. Fonts and graphics are served with the site. GitHub Pages serves the site and may process request information under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub’s privacy statement</a>. Copy game link uses your browser's clipboard when you click it.</p><h2>Built to tinker with</h2><p>View the project, the build plan and the reference review <a href="https://github.com/Parthawe/timepass-india" target="_blank" rel="noopener">on GitHub</a>. No affiliation with Neal.fun or Monopoly.</p></main>${footer()}</div>`;
   on("clear-data", () => {
     try {
       ["cricket", "dabba", "roti", "roti-timing", "masala", "daily"].forEach(

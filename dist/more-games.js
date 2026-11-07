@@ -208,7 +208,7 @@ export function createMoreGames({ mount, on, $ }) {
       showHint = false,
       approved = false;
     mount(
-      `<div class="pass-form"><div class="pass-slip"><span>WINDOW 03</span><span>Visitor desk</span></div><form id="society-form" novalidate><label for="visitor-message">Your completely made-up visitor message</label><p class="muted">The desk keeps adding requirements. Earlier rules still apply.</p><textarea id="visitor-message" rows="3" maxlength="80" autocomplete="off" spellcheck="false" placeholder="Invent a message. No real names, IDs or addresses." aria-describedby="pass-counter pass-note"></textarea><div class="pass-counter" id="pass-counter">0 / 80 characters</div><div class="pass-rules" id="pass-rules" aria-label="Visitor message rules"></div><p id="pass-note" class="feedback" role="status">The first requirement is on the board.</p><div id="pass-hint" class="hint-text"></div><div class="actions"><button class="primary" id="submit-pass" type="submit" disabled>Get the pretend pass</button><button id="hint-pass" type="button">Help with this rule</button><button id="reset-pass" type="button">Start over</button></div></form><div id="approved-pass"></div></div><p class="fineprint">This is a fictional form puzzle. Nothing is submitted, saved or sent anywhere.</p>`,
+      `<div class="pass-form"><form id="society-form" novalidate><label for="visitor-message">Your visitor message</label><p class="muted">Use a made-up message. Each new rule must be met along with the earlier ones.</p><textarea id="visitor-message" rows="3" maxlength="80" autocomplete="off" spellcheck="false" placeholder="Invent a message. No real names, IDs or addresses." aria-describedby="pass-counter pass-note"></textarea><div class="pass-counter" id="pass-counter">0 / 80 characters</div><div class="pass-rules" id="pass-rules" aria-label="Visitor message rules"></div><p id="pass-note" class="feedback" role="status">The first requirement is on the board.</p><div id="pass-hint" class="hint-text"></div><div class="actions"><button class="primary" id="submit-pass" type="submit" disabled>Request pass</button><button id="hint-pass" type="button">Help with this rule</button><button id="reset-pass" type="button">Start over</button></div></form><div id="approved-pass"></div></div><p class="fineprint">This is a fictional form puzzle. Nothing is submitted, saved or sent anywhere.</p>`,
     );
     const input = $("#visitor-message");
     const refresh = () => {
@@ -268,7 +268,7 @@ export function createMoreGames({ mount, on, $ }) {
         input.disabled = true;
         $("#hint-pass").disabled = true;
         $("#approved-pass").innerHTML =
-          '<div class="result" role="status"><div class="approval-stamp">APPROVED</div><h2>The desk lets you in.</h2><p>Ten rules satisfied. Your imaginary neighbours are expecting you.</p></div>';
+          '<div class="result" role="status"><h2>Pass approved</h2><p>Your message meets all ten rules.</p></div>';
         refresh();
         const result = $("#approved-pass .result");
         result.tabIndex = -1;

@@ -41,3 +41,5 @@ Bricolage Grotesque is distributed under the SIL Open Font License; see `dist/as
 Release 1.1 adds five seat puzzles, 21 kitchen discoveries and a ten-rule visitor-pass puzzle. New modules are in `dist/more-engine.js` and `dist/more-games.js`.
 
 Release 1.2 improves the existing games: animated cricket with pause/resume, gentle pace, repeatable daily overs and score copying; bulk shopping and buy-max; personal records on the shelf; and recommendations after every game. Daily scores use the device's calendar date and stay in local storage for at most thirty dates. See `tests/RELEASE-1.2.md` for verification.
+
+Release 1.3 replaces cartoon gallery covers with actual gameplay screenshots and simplifies the shared styling: lighter typography, thin borders, neutral surfaces and plain form feedback. The games and saved-data keys remain. Preview WebP files live in `dist/assets/previews/`; refresh their versioned filenames when recapturing them after interface changes.

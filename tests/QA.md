@@ -24,3 +24,7 @@ Seat, Please: select, place, swap, reserved seats, invalid allocation, hint, all
 ## Release 1.2 checks
 
 Complete and retry a daily over; pause/resume a delivery; leave a ball unplayed; use keyboard input and gentle pace; test reduced motion; copy a dated score link; clear daily records. Buy and sell batches, buy the maximum affordable quantity, exhaust the budget and display a large quantity on a phone. Return from a low shelf tile and the daily strip to verify scroll and focus restoration. Open the recommended games. Check the field and primary cricket action together at a short desktop and a narrow phone size.
+
+## Release 1.3 checks
+
+Verify all eleven preview assets load and all gallery links and filters work. Check the plain visitor form through approval and reset. Confirm the mascot, fake stationery header and tilted approval stamp are absent. Inspect every main screen at 320px for horizontal overflow and inspect the gallery/form on desktop. Preserve all game rules and local storage keys.

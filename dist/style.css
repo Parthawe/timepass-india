@@ -17,12 +17,12 @@
   font-display: swap;
 }
 :root {
-  --paper: #f7f6f0;
-  --ink: #292c25;
-  --muted: #65685f;
-  --line: #dadbd0;
+  --paper: #f5f5f2;
+  --ink: #292a28;
+  --muted: #62655e;
+  --line: #dadcd5;
   --green: #275e49;
-  --yellow: #f2cb65;
+  --yellow: #e1e8dd;
 }
 * {
   box-sizing: border-box;
@@ -125,7 +125,7 @@ button.small {
 }
 .tiny-logo {
   font-size: 23px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: -1px;
   text-decoration: none;
 }
@@ -149,7 +149,7 @@ button.small {
   font-size: clamp(72px, 9vw, 96px);
   line-height: 1;
   letter-spacing: -0.04em;
-  font-weight: 800;
+  font-weight: 600;
   margin: 0;
   display: inline-block;
   position: relative;
@@ -162,13 +162,7 @@ button.small {
   font-size: 19px;
   color: var(--muted);
 }
-.masthead .cup-mark {
-  position: absolute;
-  width: 72px;
-  right: -58px;
-  top: -28px;
-  transform: rotate(12deg);
-}
+
 .shelf-head {
   display: flex;
   align-items: center;
@@ -221,11 +215,7 @@ button.small {
   overflow: hidden;
   isolation: isolate;
 }
-.tile svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+
 .card-label {
   display: flex;
   align-items: center;
@@ -235,7 +225,7 @@ button.small {
 }
 .card-label h2 {
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 600;
   margin: 0;
   line-height: 1.3;
 }
@@ -256,26 +246,7 @@ button.small {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-.endnote {
-  margin: 41px 0 0;
-  padding: 22px 0 34px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-.endnote p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-.endnote .scribble {
-  font-size: 21px;
-  font-weight: 600;
-  transform: rotate(-3deg);
-  color: var(--green);
-}
+
 footer {
   border-top: 1px solid var(--line);
   padding: 20px 0 28px;
@@ -319,7 +290,7 @@ footer div {
   letter-spacing: -0.03em;
   line-height: 1.1;
   margin: 0 0 12px;
-  font-weight: 800;
+  font-weight: 600;
 }
 .game-header p {
   color: var(--muted);
@@ -349,7 +320,7 @@ footer div {
 }
 .status strong {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
 }
 .status .muted {
   font-size: 13px;
@@ -403,7 +374,7 @@ footer div {
 }
 .money-header .balance {
   font-size: clamp(30px, 5vw, 48px);
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
 }
@@ -529,7 +500,7 @@ footer div {
   display: grid;
   place-items: center;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 600;
 }
 .ball-result.hit {
   background: var(--yellow);
@@ -571,16 +542,7 @@ footer div {
   height: 100%;
   width: 180px;
 }
-.market-scene {
-  height: 170px;
-  background: #eac49b;
-  overflow: hidden;
-  border-radius: 7px;
-}
-.market-scene svg {
-  height: 100%;
-  width: 100%;
-}
+
 .bargain-quote {
   font-size: 25px;
   text-align: center;
@@ -763,7 +725,7 @@ footer div {
 }
 .die {
   font-size: 43px;
-  font-weight: 800;
+  font-weight: 600;
   background: var(--paper);
   border: 1.5px solid var(--ink);
   border-radius: 9px;
@@ -943,11 +905,7 @@ input[type="range"] {
   .masthead p {
     font-size: 16px;
   }
-  .masthead .cup-mark {
-    width: 48px;
-    right: -24px;
-    top: -22px;
-  }
+
   .games {
     gap: 24px;
     grid-template-columns: 1fr;
@@ -970,15 +928,7 @@ input[type="range"] {
     gap: 5px;
     padding: 5px 0 5px 8px;
   }
-  .endnote {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 30px;
-  }
-  .endnote .scribble {
-    font-size: 18px;
-  }
+
   footer {
     flex-direction: column;
     gap: 10px;
@@ -1105,11 +1055,7 @@ input[type="range"] {
   .masthead p {
     font-size: 14px;
   }
-  .masthead .cup-mark {
-    right: -8px;
-    top: -30px;
-    width: 38px;
-  }
+
   .game-nav .back {
     font-size: 12px;
     gap: 4px;
@@ -1130,11 +1076,7 @@ input[type="range"] {
   .wordmark {
     font-size: 60px;
   }
-  .masthead .cup-mark {
-    width: 30px;
-    right: 4px;
-    top: -26px;
-  }
+
   .topbar {
     gap: 12px;
   }
@@ -1152,7 +1094,7 @@ input[type="range"] {
   font-size: 21px;
   line-height: 1.25;
   margin: 0 0 18px;
-  font-weight: 800;
+  font-weight: 600;
 }
 .seat-layout {
   display: grid;
@@ -1187,7 +1129,7 @@ input[type="range"] {
   height: 25px;
   border-radius: 50%;
   border: 1px solid currentColor;
-  font-weight: 800;
+  font-weight: 600;
 }
 .coach {
   padding: 15px;
@@ -1326,15 +1268,7 @@ input[type="range"] {
   border-radius: 8px;
   padding: 25px;
 }
-.pass-slip {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #b8b7a4;
-  padding-bottom: 14px;
-  margin-bottom: 22px;
-  font-size: 12px;
-  color: #62614e;
-}
+
 .pass-form label {
   font-weight: 600;
   font-size: 18px;
@@ -1399,18 +1333,7 @@ input[type="range"] {
 .pass-rule.needs-work .rule-state {
   color: #8f3d28;
 }
-.approval-stamp {
-  border: 3px solid #275e49;
-  border-radius: 3px;
-  color: #275e49;
-  display: inline-block;
-  padding: 5px 20px;
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  margin-bottom: 15px;
-  transform: rotate(-4deg);
-}
+
 @media (max-width: 650px) {
   .seat-layout {
     grid-template-columns: 1fr;
@@ -1446,9 +1369,6 @@ input[type="range"] {
   }
   .pass-form label {
     font-size: 17px;
-  }
-  .pass-slip {
-    font-size: 11px;
   }
 }
 @media (max-width: 650px) {
@@ -1510,19 +1430,12 @@ input[type="range"] {
   width: 100%;
   height: 100%;
 }
-.daily-banner > span:nth-child(2) {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
+
 .daily-banner strong {
   font-size: 19px;
-  font-weight: 800;
+  font-weight: 600;
 }
-.daily-banner > span:nth-child(2) > span {
-  font-size: 13px;
-  color: #536148;
-}
+
 .daily-cta {
   display: flex;
   align-items: center;
@@ -1554,7 +1467,7 @@ input[type="range"] {
   font-size: 23px;
   line-height: 1.2;
   margin: 0 0 20px;
-  font-weight: 800;
+  font-weight: 600;
 }
 .next-games {
   display: grid;
@@ -1568,20 +1481,7 @@ input[type="range"] {
   text-decoration: none;
   min-width: 0;
 }
-.next-thumb {
-  display: block;
-  width: 116px;
-  aspect-ratio: 360/194;
-  flex: none;
-  border: 1px solid var(--ink);
-  border-radius: 5px;
-  overflow: hidden;
-}
-.next-thumb svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+
 .next-game > span:nth-child(2) {
   display: flex;
   flex-direction: column;
@@ -1589,7 +1489,7 @@ input[type="range"] {
 }
 .next-game strong {
   font-size: 17px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.3;
 }
 .next-game > span:nth-child(2) > span {
@@ -1726,7 +1626,7 @@ input[type="range"] {
 }
 .cricket-score > div:first-child > strong {
   font-size: 48px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.03em;
 }
@@ -1750,7 +1650,7 @@ input[type="range"] {
 .cricket-best strong {
   font-size: 20px;
   color: var(--ink);
-  font-weight: 800;
+  font-weight: 600;
 }
 .cricket-field.live-field {
   height: auto;
@@ -1826,9 +1726,6 @@ input[type="range"] {
   resize: vertical;
 }
 @media (max-width: 950px) {
-  .next-thumb {
-    width: 95px;
-  }
   .next-game {
     gap: 11px;
   }
@@ -1853,9 +1750,7 @@ input[type="range"] {
   .daily-banner strong {
     font-size: 17px;
   }
-  .daily-banner > span:nth-child(2) > span {
-    font-size: 11px;
-  }
+
   .daily-cta {
     font-size: 12px;
     margin-left: 44px;
@@ -1869,9 +1764,7 @@ input[type="range"] {
     grid-template-columns: 1fr;
     gap: 18px;
   }
-  .next-thumb {
-    width: 113px;
-  }
+
   .next-game > svg {
     display: block;
   }
@@ -2105,5 +1998,700 @@ input[type="range"] {
   }
   .view-cricket .cricket-actions {
     margin-top: 6px;
+  }
+}
+/* The game interfaces provide the imagery; shared chrome stays quiet. */
+button {
+  border-width: 1px;
+  border-color: #aeb3a7;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+button.primary {
+  border-color: var(--ink);
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+canvas:focus-visible {
+  outline-width: 2px;
+  outline-offset: 4px;
+}
+.shell {
+  max-width: 1152px;
+  padding-inline: 32px;
+}
+.topbar {
+  padding: 26px 0 22px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+.site-name {
+  font-size: 19px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+.topbar nav {
+  gap: 25px;
+  color: var(--muted);
+}
+.masthead {
+  text-align: left;
+  padding: 44px 0 30px;
+}
+.wordmark {
+  font-size: 44px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+.masthead p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-top: 13px;
+  max-width: 50ch;
+}
+.daily-banner {
+  background: transparent;
+  border-block: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 17px 19px;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+.daily-banner > span:first-child {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.daily-banner strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+.daily-banner > span:first-child > span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.daily-banner .daily-cta {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--green);
+}
+.daily-banner:hover {
+  background: #ecefe7;
+}
+.daily-cta svg {
+  width: 15px;
+  height: 15px;
+}
+.shelf-head {
+  padding-bottom: 16px;
+  margin-bottom: 23px;
+}
+.filters {
+  gap: 21px;
+}
+.filters button {
+  min-height: 40px;
+  padding: 5px 0;
+  border-radius: 0;
+  font-size: 13px;
+  color: var(--muted);
+  background: none;
+  border-bottom: 1px solid transparent;
+}
+.filters button[aria-pressed="true"] {
+  background: none;
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+.filters button:hover:not(:disabled) {
+  background: none;
+  color: var(--ink);
+}
+.random {
+  font-size: 13px;
+  color: var(--muted);
+  min-height: 40px;
+}
+.games {
+  gap: 34px 25px;
+  padding-bottom: 48px;
+}
+.tile {
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  aspect-ratio: 8/5;
+  height: auto;
+  background: #e9ece5;
+  overflow: hidden;
+}
+.tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: none;
+}
+.game-card:hover .tile {
+  border-color: #9da696;
+}
+.card-label {
+  padding-top: 13px;
+  align-items: baseline;
+}
+.card-label h2 {
+  font-size: 17px;
+  font-weight: 600;
+}
+.card-label span {
+  font-size: 11px;
+}
+.card-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 5px;
+}
+.personal-record {
+  font-size: 11px;
+  margin-top: 9px;
+  font-weight: 400;
+}
+.tiny-logo {
+  font-size: 19px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+.game-nav {
+  padding-block: 21px;
+}
+.game-nav .small {
+  font-size: 12px;
+  border-color: var(--line);
+  font-weight: 400;
+}
+.game-header {
+  margin: 34px auto 28px;
+}
+.game-header h1 {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+.game-header p {
+  font-size: 14px;
+  line-height: 1.65;
+  max-width: 58ch;
+}
+.status strong {
+  font-weight: 600;
+}
+.status .muted {
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+.panel {
+  background: #fbfcf8;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+.feedback {
+  font-weight: 400;
+  font-size: 14px;
+}
+.result {
+  background: #edf1e8;
+  border: 1px solid #cbd6c2;
+  border-radius: 4px;
+  padding: 25px;
+}
+.result h2 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.result p {
+  font-size: 14px;
+}
+.fineprint {
+  font-size: 11px;
+  line-height: 1.7;
+  max-width: 65ch;
+  margin-inline: auto;
+}
+.money-header {
+  background: #eef1e8;
+  border: 1px solid #cbd5c1;
+  border-radius: 4px;
+}
+.money-header .balance {
+  font-weight: 600;
+}
+.shop-item h2 {
+  font-weight: 600;
+}
+.cricket-field.live-field {
+  border-color: #acb6a3;
+  border-width: 1px;
+  border-radius: 4px;
+}
+.cricket-score > div:first-child > strong,
+.cricket-best strong {
+  font-weight: 600;
+}
+.timing-track {
+  border-width: 1px;
+  border-color: #aeb7a3;
+  border-radius: 3px;
+}
+.ball-result {
+  font-weight: 600;
+}
+.ball-result.current {
+  outline-width: 1px;
+}
+.ball-result.six {
+  background: #4b7152;
+}
+.chai-art {
+  height: 85px;
+  margin-bottom: 16px;
+}
+.order-ticket {
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.order-ticket h2 {
+  font-size: 22px;
+  font-weight: 600;
+}
+.bargain-quote {
+  font-size: 23px;
+  font-weight: 600;
+}
+.memory-card {
+  background: #dbe0d6;
+  border-color: #b3bdac;
+  border-radius: 5px;
+}
+.memory-card .back-pattern {
+  border-color: #9aa791;
+  color: #546349;
+}
+.memory-card.flipped {
+  background: #fbfcf8;
+}
+.memory-card.matched {
+  background: #e6eddf;
+  border-color: #a2b48e;
+}
+.memory-card.matched:after {
+  font-size: 10px;
+}
+.mix-slot {
+  background: #f0f2eb;
+  border-color: #b8c0af;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ingredient-chip {
+  background: #e9eee2;
+  border-color: #c2cdb6;
+  font-weight: 400;
+  border-radius: 4px;
+}
+.ingredient-chip.base {
+  background: transparent;
+  border-color: #c4c9bc;
+}
+.ingredient-chip[aria-pressed="true"] {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--paper);
+}
+.pass-form {
+  background: #fbfcf8;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 28px;
+}
+.pass-form label {
+  font-size: 16px;
+  font-weight: 600;
+}
+.pass-form textarea {
+  background: #fffef9;
+  border: 1px solid #aeb6a5;
+  border-radius: 4px;
+  font-size: 16px;
+  min-height: 105px;
+}
+.pass-form textarea:disabled {
+  background: #eff3e9;
+}
+.pass-rule {
+  border-bottom-color: var(--line);
+  font-size: 14px;
+  line-height: 1.6;
+  padding-block: 14px;
+}
+.rule-state {
+  font-size: 11px;
+  font-weight: 400;
+  min-width: 56px;
+}
+.pass-counter {
+  font-size: 11px;
+}
+.pass-form .feedback {
+  font-size: 13px;
+}
+.pass-form .actions {
+  justify-content: flex-start;
+}
+.subheading {
+  font-size: 20px;
+  font-weight: 600;
+}
+.passenger-picker button {
+  font-weight: 400;
+  border-color: #b2bba9;
+}
+.passenger-letter {
+  border: 0;
+  font-weight: 600;
+  width: auto;
+  height: 21px;
+}
+.coach {
+  background: #e9eee1;
+  border: 1px solid #c4cdb9;
+  border-radius: 9px;
+}
+.coach-seat {
+  background: #fbfcf7;
+  border-color: #a9b59e;
+  border-radius: 5px;
+}
+.coach-seat strong {
+  font-weight: 600;
+}
+.coach-seat.occupied {
+  background: #d5e3ce;
+}
+.coach-seat.reserved {
+  background: #e6e3da;
+  color: #66665e;
+  border-color: #c4c4b8;
+}
+.seat-requests li {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.city-board {
+  border-color: #a8b49b;
+  border-width: 1px;
+  border-radius: 5px;
+}
+.property {
+  border-color: #b5c0a7;
+}
+.board-center h2 {
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.die {
+  font-weight: 600;
+  border-color: #9ca98e;
+  border-width: 1px;
+  border-radius: 5px;
+}
+.city-player strong {
+  font-weight: 600;
+}
+.train-window {
+  border-color: #7b857b;
+  border-width: 9px;
+  border-radius: 38px 38px 22px 22px;
+}
+.keep-playing {
+  padding-top: 28px;
+  margin-bottom: 35px;
+}
+.keep-playing h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.next-games {
+  gap: 25px;
+}
+.next-game {
+  padding-block: 17px;
+  border-bottom: 1px solid var(--line);
+  gap: 20px;
+}
+.next-game strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+.next-game > span:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.next-game > span:nth-child(1) > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.next-game > svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: none;
+  margin-left: auto;
+}
+.browse-games {
+  font-size: 12px;
+}
+.about h1 {
+  font-weight: 600;
+  font-size: 35px;
+}
+.about h2 {
+  font-weight: 600;
+}
+footer {
+  font-size: 11px;
+  padding-block: 22px;
+  color: var(--muted);
+}
+@media (max-width: 950px) {
+  .games {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .next-game > svg {
+    display: block;
+  }
+  .daily-banner > span:first-child {
+    gap: 6px 15px;
+  }
+  .view-cricket .game-header h1 {
+    font-weight: 600;
+  }
+}
+@media (max-width: 650px) {
+  .shell {
+    padding-inline: 20px;
+  }
+  .topbar {
+    padding-block: 23px 19px;
+  }
+  .topbar nav {
+    font-size: 12px;
+    gap: 19px;
+  }
+  .masthead {
+    padding: 34px 0 25px;
+  }
+  .wordmark {
+    font-size: 34px;
+    line-height: 1.15;
+  }
+  .masthead p {
+    font-size: 14px;
+    margin-top: 11px;
+  }
+  .daily-banner {
+    padding: 15px;
+    margin-bottom: 24px;
+    gap: 9px;
+  }
+  .daily-banner > span:first-child {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .daily-banner strong {
+    font-size: 14px;
+  }
+  .daily-banner > span:first-child > span {
+    font-size: 11px;
+  }
+  .daily-banner .daily-cta {
+    font-size: 12px;
+    margin-left: 0;
+    width: 100%;
+    margin-top: 3px;
+  }
+  .shelf-head {
+    align-items: center;
+    flex-direction: row;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .filters {
+    gap: 18px;
+    flex-wrap: nowrap;
+  }
+  .filters button {
+    font-size: 12px;
+  }
+  .random {
+    font-size: 12px;
+    padding: 0;
+    align-self: auto;
+  }
+  .games {
+    grid-template-columns: 1fr;
+    gap: 29px;
+    padding-bottom: 37px;
+  }
+  .tile {
+    aspect-ratio: 8/5;
+    height: auto;
+  }
+  .card-label {
+    padding-top: 12px;
+  }
+  .card-label h2 {
+    font-size: 17px;
+  }
+  .card-desc {
+    font-size: 13px;
+  }
+  .game-nav {
+    padding-block: 18px;
+  }
+  .game-nav .tiny-logo {
+    font-size: 17px;
+  }
+  .game-nav .small {
+    font-size: 11px;
+    padding: 7px 8px;
+  }
+  .game-nav .back {
+    font-size: 12px;
+  }
+  .game-header {
+    margin: 27px auto 23px;
+  }
+  .game-header h1 {
+    font-size: 29px;
+    font-weight: 600;
+  }
+  .game-header p {
+    font-size: 13px;
+  }
+  .panel,
+  .pass-form {
+    padding: 20px 17px;
+  }
+  .pass-form label {
+    font-size: 15px;
+  }
+  .pass-form textarea {
+    font-size: 16px;
+  }
+  .pass-form .actions {
+    gap: 8px;
+  }
+  .pass-form .actions button {
+    font-size: 12px;
+    padding-inline: 10px;
+  }
+  .result h2 {
+    font-size: 23px;
+  }
+  .status strong {
+    font-size: 23px;
+  }
+  .next-games {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .keep-playing h2 {
+    font-size: 18px;
+  }
+  .next-game strong {
+    font-size: 15px;
+  }
+  .train-window {
+    border-width: 7px;
+    border-radius: 30px 30px 18px 18px;
+  }
+  .board-center h2 {
+    font-size: 25px;
+  }
+  .wordmark .period,
+  .cup-mark {
+    display: none;
+  }
+  .site-name {
+    font-size: 18px;
+  }
+}
+.tile img {
+  object-fit: contain;
+  padding: 16px;
+  background: #e9ece4;
+}
+.topbar {
+  padding-block: 22px 18px;
+}
+.masthead {
+  padding-block: 32px 24px;
+}
+.wordmark {
+  font-size: 38px;
+  font-weight: 400;
+}
+.masthead p {
+  margin-top: 11px;
+  font-size: 15px;
+}
+.daily-banner {
+  padding-block: 15px;
+  margin-bottom: 25px;
+}
+.daily-banner > .daily-cta {
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+}
+.game-header h1 {
+  font-weight: 400;
+}
+.view-cricket .game-header h1 {
+  font-weight: 400;
+}
+@media (max-width: 650px) {
+  .masthead {
+    padding-block: 29px 24px;
+  }
+  .wordmark {
+    font-size: 32px;
+    font-weight: 400;
+  }
+  .masthead p {
+    font-size: 13px;
+    margin-top: 9px;
+  }
+  .daily-banner > .daily-cta {
+    margin-left: 0;
+  }
+  .game-header h1 {
+    font-weight: 400;
   }
 }

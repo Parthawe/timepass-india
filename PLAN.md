@@ -38,3 +38,7 @@ Ship a deterministic build with content-hashed JavaScript and CSS, including dep
 ## Release 1.2
 
 Improve the existing collection rather than add more tiles. Rebuild Gully Cricket with visible deliveries, bat and ball feedback, pause/resume, gentle practice pace, a reproducible daily over and local score sharing. Add bulk purchases and buy-max to Spend a Crore. Keep browsing context when returning to the shelf, show personal records from actual local scores, and connect every game to two other experiences. Preserve existing scores and the illustrated visual system.
+
+## Release 1.3
+
+Refine graphics and styling in response to the user's feedback. Replace cartoon title covers with screenshots of the actual games. Remove the masthead mascot, tilted decorations, fake stationery and rubber-stamp feedback. Correct the font-face weight mapping, lighten headings and borders, simplify the daily link and recommendation links, and retain all eleven games and saved-data behavior. Verify the gallery, form states, keyboard navigation and phone layouts before deploying.
