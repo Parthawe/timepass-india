@@ -33,77 +33,77 @@ const games = [
   {
     id: "seats",
     name: "Seat, Please",
-    desc: "Four passengers. Very specific requests.",
+    desc: "Seat four passengers and meet every request.",
     time: "5 min",
     group: "quick",
   },
   {
     id: "masala",
     name: "Masala Lab",
-    desc: "A kitchen full of what happens if.",
+    desc: "Mix two ingredients and see what you discover.",
     time: "At your pace",
     group: "slow",
   },
   {
     id: "society",
     name: "Society Pass",
-    desc: "The form has one more requirement.",
+    desc: "Write a visitor message as the rules pile up.",
     time: "3 min",
     group: "quick",
   },
   {
     id: "city",
     name: "City Tycoon",
-    desc: "Buy a city. Try to keep it.",
+    desc: "Buy property and beat the computer on net worth.",
     time: "10 min",
     group: "slow",
   },
   {
     id: "spend",
     name: "Spend a Crore",
-    desc: "₹1,00,00,000. Your very imaginary money.",
+    desc: "See how far ₹1,00,00,000 goes.",
     time: "At your pace",
     group: "slow",
   },
   {
     id: "cricket",
     name: "Gully Cricket",
-    desc: "Six balls. One very small boundary.",
+    desc: "Time your swing over six deliveries.",
     time: "1 min",
     group: "quick",
   },
   {
     id: "chai",
     name: "Chai Tapri",
-    desc: "Five orders. No time for wrong chai.",
+    desc: "Make five chai orders from memory.",
     time: "2 min",
     group: "quick",
   },
   {
     id: "bargain",
     name: "Bargain Bazaar",
-    desc: "“Bhaiya, last price?”",
+    desc: "Ask for the last price at three stalls.",
     time: "3 min",
     group: "quick",
   },
   {
     id: "dabba",
     name: "Dabba Memory",
-    desc: "Now, where did the samosa go?",
+    desc: "Open the dabbas and match six lunches.",
     time: "2 min",
     group: "quick",
   },
   {
     id: "roti",
     name: "Perfect Roti",
-    desc: "Round is a matter of opinion. Almost.",
+    desc: "Draw a roti and see how round it is.",
     time: "30 sec",
     group: "quick",
   },
   {
     id: "train",
     name: "Train Window",
-    desc: "A window seat. Absolutely no agenda.",
+    desc: "Take a window seat and watch the countryside.",
     time: "Stay a while",
     group: "slow",
   },
@@ -161,13 +161,25 @@ function personalRecord(id) {
     return "";
   }
 }
-function dailyBanner() {
-  const day = dayKey(),
-    records = readDaily();
-  const record = Object.hasOwn(records, day)
-    ? `Your best today: ${records[day]} / 36`
-    : `Six balls. Target ${dailyTarget} runs.`;
-  return `<a id="daily-challenge" class="daily-banner" href="#/cricket?mode=daily&day=${day}"><span><strong>Daily cricket</strong><span>${dailyLabel(day)} · ${record}</span></span><span class="daily-cta">Play today’s over ${icon("arrow")}</span></a>`;
+function dailyFeature() {
+  const day = dayKey();
+  const records = readDaily();
+  const played = Object.hasOwn(records, day);
+  return `
+    <a id="daily-challenge" class="daily-feature" href="#/cricket?mode=daily&day=${day}">
+      <div class="daily-feature-copy">
+        <time datetime="${day}">${dailyLabel(day)}</time>
+        <h2>Daily cricket</h2>
+        <p>Six balls to score ${dailyTarget} runs.</p>
+        ${played ? `<p class="personal-record">Your best today is ${records[day]} / 36.</p>` : ""}
+        <span class="daily-feature-action">
+          ${played ? "Replay today’s over" : "Play today’s over"} ${icon("arrow")}
+        </span>
+      </div>
+      <div class="daily-feature-image">
+        <img src="./assets/previews/daily-pitch.webp" width="558" height="278" alt="" fetchpriority="high">
+      </div>
+    </a>`;
 }
 const recommendations = {
   cricket: ["roti", "dabba"],
@@ -196,13 +208,50 @@ function keepPlaying(id) {
 }
 function home() {
   document.title = "Timepass · Games and experiments";
-  app.innerHTML = `<div class="shell"><header class="topbar"><a class="site-name" href="#/">Timepass</a><nav><a href="#/about">About</a><a href="https://github.com/Parthawe/timepass-india" target="_blank" rel="noopener">Source</a></nav></header><main id="main"><div class="masthead"><h1 class="wordmark">A little timepass.</h1><p>Small games and experiments from everyday India.</p></div>${dailyBanner()}<div class="shelf-head"><div class="filters" aria-label="Filter games"><button id="all" aria-pressed="${filter === "all"}">All games</button><button id="quick" aria-pressed="${filter === "quick"}">Quick play</button><button id="slow" aria-pressed="${filter === "slow"}">Take your time</button></div><button class="random" id="random">Choose for me</button></div><div class="games" id="games"></div></main>${footer()}</div>`;
+  app.innerHTML = `
+    <div class="shell">
+      <header class="topbar">
+        <a class="site-name" href="#/">Timepass</a>
+        <nav>
+          <a href="#/about">About</a>
+          <a href="https://github.com/Parthawe/timepass-india" target="_blank" rel="noopener">Source</a>
+        </nav>
+      </header>
+      <main id="main">
+        <div class="home-opening">
+          <div class="masthead">
+            <h1>A little timepass.</h1>
+            <p>Small games and experiments from everyday India.</p>
+          </div>
+          ${dailyFeature()}
+        </div>
+        <div class="shelf-head">
+          <div class="filters" role="group" aria-label="Filter games">
+            <button id="all" aria-pressed="${filter === "all"}">All games</button>
+            <button id="quick" aria-pressed="${filter === "quick"}">Quick play</button>
+            <button id="slow" aria-pressed="${filter === "slow"}">Take your time</button>
+          </div>
+          <button class="random" id="random">Choose for me</button>
+        </div>
+        <div class="games" id="games"></div>
+      </main>
+      ${footer()}
+    </div>`;
   const draw = () => {
     $("#games").innerHTML = games
       .filter((g) => filter === "all" || g.group === filter)
       .map(
         (g) =>
-          `<a href="#/${g.id}" class="game-card"><div class="tile"><img src="./assets/previews/${g.id}-1.3.webp" width="720" height="450" alt="" loading="lazy" decoding="async"></div><div class="card-label"><h2>${g.name}</h2><span>${g.time}</span></div><p class="card-desc">${g.desc}</p>${personalRecord(g.id)}</a>`,
+          `<a href="#/${g.id}" class="game-card">
+            <div class="tile">
+              <img src="./assets/previews/${g.id}-1.3.webp" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="card-copy">
+              <div class="card-label"><h2>${g.name}</h2><span>${g.time}</span></div>
+              <p class="card-desc">${g.desc}</p>
+              ${personalRecord(g.id)}
+            </div>
+          </a>`,
       )
       .join("");
   };
