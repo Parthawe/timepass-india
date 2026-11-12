@@ -161,24 +161,16 @@ function personalRecord(id) {
     return "";
   }
 }
-function dailyFeature() {
+function dailyLink() {
   const day = dayKey();
   const records = readDaily();
   const played = Object.hasOwn(records, day);
   return `
-    <a id="daily-challenge" class="daily-feature" href="#/cricket?mode=daily&day=${day}">
-      <div class="daily-feature-copy">
-        <time datetime="${day}">${dailyLabel(day)}</time>
-        <h2>Daily cricket</h2>
-        <p>Six balls to score ${dailyTarget} runs.</p>
-        ${played ? `<p class="personal-record">Your best today is ${records[day]} / 36.</p>` : ""}
-        <span class="daily-feature-action">
-          ${played ? "Replay today’s over" : "Play today’s over"} ${icon("arrow")}
-        </span>
-      </div>
-      <div class="daily-feature-image">
-        <img src="./assets/previews/daily-pitch.webp" width="558" height="278" alt="" fetchpriority="high">
-      </div>
+    <a id="daily-challenge" class="daily-link" href="#/cricket?mode=daily&day=${day}">
+      <strong>${played ? "Replay daily cricket" : "Daily cricket"}</strong>
+      <span>${played ? `Best ${records[day]} / 36` : `Target ${dailyTarget}`}</span>
+      <span class="sr-only">${dailyLabel(day)}</span>
+      ${icon("arrow")}
     </a>`;
 }
 const recommendations = {
@@ -210,28 +202,21 @@ function home() {
   document.title = "Timepass · Games and experiments";
   app.innerHTML = `
     <div class="shell">
-      <header class="topbar">
-        <a class="site-name" href="#/">Timepass</a>
-        <nav>
-          <a href="#/about">About</a>
-          <a href="https://github.com/Parthawe/timepass-india" target="_blank" rel="noopener">Source</a>
-        </nav>
-      </header>
       <main id="main">
-        <div class="home-opening">
-          <div class="masthead">
-            <h1>A little timepass.</h1>
-            <p>Small games and experiments from everyday India.</p>
-          </div>
-          ${dailyFeature()}
-        </div>
+        <header class="masthead">
+          <h1>Timepass</h1>
+          <p>Small games from everyday India.</p>
+        </header>
         <div class="shelf-head">
           <div class="filters" role="group" aria-label="Filter games">
             <button id="all" aria-pressed="${filter === "all"}">All games</button>
             <button id="quick" aria-pressed="${filter === "quick"}">Quick play</button>
             <button id="slow" aria-pressed="${filter === "slow"}">Take your time</button>
           </div>
-          <button class="random" id="random">Choose for me</button>
+          <div class="shelf-actions">
+            ${dailyLink()}
+            <button class="random" id="random">Choose for me</button>
+          </div>
         </div>
         <div class="games" id="games"></div>
       </main>
@@ -242,13 +227,13 @@ function home() {
       .filter((g) => filter === "all" || g.group === filter)
       .map(
         (g, index) =>
-          `<a href="#/${g.id}" class="game-card">
-            <div class="tile">
-              <img src="./assets/previews/${g.id}-1.3.webp" alt="" loading="${index < 3 ? "eager" : "lazy"}" decoding="async">
-            </div>
-            <div class="card-copy">
-              <div class="card-label"><h2>${g.name}</h2><span>${g.time}</span></div>
-              <p class="card-desc">${g.desc}</p>
+          `<a href="#/${g.id}" class="game-card" data-game="${g.id}">
+            <img src="./assets/covers/${g.id}.webp" width="512" height="256" alt=""
+              loading="${index < 3 ? "eager" : "lazy"}" decoding="async">
+            <div class="cover-copy">
+              <h2>${g.name}</h2>
+              <span class="cover-time">${g.time}</span>
+              <span class="sr-only">${g.desc}</span>
               ${personalRecord(g.id)}
             </div>
           </a>`,

@@ -1,13 +1,9 @@
 # Design
 
-Timepass keeps the immediate game-gallery navigation inspired by Neal.fun. The user asked for less gimmicky graphics and overall styling; the games and their mechanics remain in scope to preserve.
+Timepass follows [Neal.fun's gallery](https://neal.fun/) as the visual reference. A centered wordmark and one line of introduction lead directly into the games. The daily cricket link sits beside the browsing controls.
 
-Use captured gameplay as the gallery imagery. The eleven WebP covers in `dist/assets/previews/` come from the working interfaces, captured through the browser. Their purpose is to show what opens after a click. Game-specific drawings remain where they carry the interaction, such as the cricket pitch, roti canvas, lunch matching tiles and train window.
+Each game has a wide illustrated cover with its title and duration in live text. The covers use objects from the games, including a railway bench, a masala dabba and a cricket bat. Keep the gallery background quiet and give each cover its own palette. The grid uses three columns on desktop, two on tablet and one on phones.
 
-The shared interface uses a light neutral surface, dark type, thin borders and restrained green for actions, selection and success. Self-hosted Bricolage Grotesque uses 400 for reading and 600 for labels and the home headline. Game art supplies the color.
+Cover art comes from an original ImageGen sheet and is served as individual compressed WebPs in `dist/assets/covers/`. Keep titles outside the image so they remain selectable, readable on small screens and available to assistive technology. The cover title and link must remain legible while art loads or if it fails to load.
 
-The home opening pairs the title with a daily cricket feature. Its image shows the actual pitch, and its link shows the target and the player's best score when available. The catalog uses wide previews on desktop and tablet, then switches to compact rows with a thumbnail, title, duration and description on phones. The framing and phone layout draw on the Work and mobile Index references in [Parth Design Taste](https://github.com/Parthawe/parth-design-taste/blob/main/START-HERE.md).
-
-Game pages share concise navigation and two text links to other games. Keep keyboard focus, touch targets, reduced-motion behavior and readable contrasts. Use plain form surfaces and success feedback.
-
-Previews are static screenshots of actual local play, not interactive controls or public score claims. Capture the relevant game region after styling changes; retain source PNGs in the ignored `qa/previews/` directory and publish compressed WebP assets. Version their filenames when refreshing the covers.
+Game pages keep their functional drawings, plain form surfaces, and concise navigation. Preserve keyboard focus, touch targets, reduced-motion behavior and readable contrast. The About & data and source links are in the footer.
