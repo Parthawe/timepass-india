@@ -241,10 +241,10 @@ function home() {
     $("#games").innerHTML = games
       .filter((g) => filter === "all" || g.group === filter)
       .map(
-        (g) =>
+        (g, index) =>
           `<a href="#/${g.id}" class="game-card">
             <div class="tile">
-              <img src="./assets/previews/${g.id}-1.3.webp" alt="" loading="lazy" decoding="async">
+              <img src="./assets/previews/${g.id}-1.3.webp" alt="" loading="${index < 3 ? "eager" : "lazy"}" decoding="async">
             </div>
             <div class="card-copy">
               <div class="card-label"><h2>${g.name}</h2><span>${g.time}</span></div>
