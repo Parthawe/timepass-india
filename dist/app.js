@@ -10,7 +10,7 @@ import {
   bargainOffer,
   shuffled,
 } from "./engine.js";
-import { svg, cup, icon, food } from "./art.js";
+import { svg, icon, food } from "./art.js";
 import { createMoreGames } from "./more-games.js";
 import {
   createCricket,
@@ -192,7 +192,7 @@ function keepPlaying(id) {
   )
     .map((next) => {
       const g = games.find((g) => g.id === next);
-      return `<a href="#/${g.id}" class="next-game"><span><strong>${g.name}</strong><span>${g.desc}</span></span>${icon("arrow")}</a>`;
+      return `<a href="#/${g.id}" class="next-game"><img src="./assets/covers/${g.id}.webp" width="512" height="256" loading="lazy" alt=""><span class="next-game-copy"><strong>${g.name}</strong><span>${g.desc}</span></span>${icon("arrow")}</a>`;
     })
     .join(
       "",
@@ -258,14 +258,38 @@ function home() {
   });
 }
 function gameShell(g, desc, narrow = false) {
-  app.innerHTML = `<div class="shell"><header class="game-nav"><a class="back" href="#/">${icon("back")}All games</a><a class="tiny-logo" href="#/">Timepass</a><button id="share" class="small">Copy game link</button></header><main id="main"><div class="share-status" id="share-status" role="status"></div><header class="game-header"><h1>${g.name}</h1><p>${desc}</p></header><div class="game-stage ${narrow ? "narrow" : ""}" id="stage"></div>${keepPlaying(g.id)}</main>${footer()}</div>`;
+  app.classList.add("play-page");
+  app.innerHTML = `
+    <div class="shell">
+      <header class="game-nav">
+        <a class="back" href="#/">${icon("back")}All games</a>
+        <a class="tiny-logo" href="#/">Timepass</a>
+        <button id="share" class="small">Copy game link</button>
+      </header>
+      <main id="main">
+        <div class="share-status" id="share-status" role="status"></div>
+        <header class="game-intro" data-game="${g.id}">
+          <div class="game-intro-copy">
+            <h1>${g.name}</h1>
+            <p>${desc}</p>
+          </div>
+          <img src="./assets/covers/${g.id}.webp" width="512" height="256" alt="" fetchpriority="high">
+        </header>
+        <div class="game-stage ${narrow ? "narrow" : ""}" id="stage"></div>
+        ${keepPlaying(g.id)}
+      </main>
+      ${footer()}
+    </div>`;
   document.title = g.name + " • Timepass";
+  const shareButton = $("#share");
+  const shareStatus = $("#share-status");
   on("share", async () => {
     try {
       await navigator.clipboard.writeText(location.href);
-      $("#share-status").textContent = "Link copied. Send it to your group.";
+      if (shareButton.isConnected) shareStatus.textContent = "Game link copied.";
     } catch {
-      $("#share-status").innerHTML =
+      if (!shareButton.isConnected) return;
+      shareStatus.innerHTML =
         '<label>Copy this link <input id="share-url" readonly></label>';
       $("#share-url").value = location.href;
       $("#share-url").select();
@@ -365,7 +389,7 @@ function chai() {
   const render = () => {
     const o = deck[round];
     mount(
-      `<div class="status"><span><span class="muted">TIPS EARNED</span><br><strong>${rupees(score)}</strong></span><span class="muted">${round < 5 ? "Order " + (round + 1) + " of 5" : "Shift complete"}</span></div>${round === 5 ? `<div class="result"><h2>${score === 100 ? "Tapri legend." : "That’s your shift."}</h2><p>${score / 20} happy customers out of 5.</p><button id="reset">Open the tapri again</button></div>` : `<div class="panel"><div class="chai-art">${cup()}</div><div class="order-ticket"><p class="muted">CUSTOMER ${round + 1}</p><h2>${o.name}</h2>${!remember ? `<p>${o.line}</p><button class="small" id="remember">Got it. Put ticket away</button>` : "<p>Ticket tucked away. What went in?</p>"}</div><div class="ingredients" aria-label="Chai ingredients">${["Tea", "Milk", "Sugar", "Ginger", "Cardamom"].map((x) => `<button id="ingredient-${x}" aria-pressed="${selected.has(x)}" ${!remember || served ? "disabled" : ""}>${x}</button>`).join("")}</div><p class="feedback" role="status">${note}</p><div class="actions">${served ? '<button class="primary" id="next">' + (round === 4 ? "Close the tapri" : "Next customer") + "</button>" : `<button class="primary" id="serve" ${!remember || !selected.size ? "disabled" : ""}>Serve chai</button>${remember ? '<button id="peek">Read ticket again</button>' : ""}`}</div></div>`}`,
+      `<div class="status"><span><span class="muted">TIPS EARNED</span><br><strong>${rupees(score)}</strong></span><span class="muted">${round < 5 ? "Order " + (round + 1) + " of 5" : "Shift complete"}</span></div>${round === 5 ? `<div class="result"><h2>${score === 100 ? "Tapri legend." : "That’s your shift."}</h2><p>${score / 20} happy customers out of 5.</p><button id="reset">Open the tapri again</button></div>` : `<div class="panel tapri-panel"><div class="tapri-order"><div class="tapri-scene" aria-hidden="true"></div><div class="order-ticket"><p class="muted">CUSTOMER ${round + 1}</p><h2>${o.name}</h2>${!remember ? `<p>${o.line}</p><button class="small" id="remember">Got it. Put ticket away</button>` : "<p>Ticket tucked away. What went in?</p>"}</div></div><div class="ingredients" aria-label="Chai ingredients">${["Tea", "Milk", "Sugar", "Ginger", "Cardamom"].map((x) => `<button id="ingredient-${x}" aria-pressed="${selected.has(x)}" ${!remember || served ? "disabled" : ""}>${x}</button>`).join("")}</div><p class="feedback" role="status">${note}</p><div class="actions">${served ? '<button class="primary" id="next">' + (round === 4 ? "Close the tapri" : "Next customer") + "</button>" : `<button class="primary" id="serve" ${!remember || !selected.size ? "disabled" : ""}>Serve chai</button>${remember ? '<button id="peek">Read ticket again</button>' : ""}`}</div></div>`}`,
     );
     on("remember", () => {
       remember = true;
@@ -794,7 +818,37 @@ function train() {
     ctx = c.getContext("2d"),
     W = 1100,
     H = 650;
+  const panorama = new Image();
+  panorama.onload = () => {
+    dirty = true;
+  };
+  panorama.src = "./assets/scenes/train-countryside.webp";
+  function paintPanorama() {
+    const span = Math.round((panorama.naturalWidth / panorama.naturalHeight) * H);
+    const progress = Math.round(offset * 0.65) % (span * 2);
+    const first = Math.floor(progress / span);
+    const startX = -(progress % span);
+    ctx.filter = evening ? "sepia(42%) saturate(90%) brightness(78%)" : "none";
+    // Mirror the next pass so the edges meet as the scene scrolls.
+    for (let i = 0; i < 2; i++) {
+      const x = startX + i * span;
+      ctx.save();
+      if ((first + i) % 2) {
+        ctx.translate(x + span, 0);
+        ctx.scale(-1, 1);
+        ctx.drawImage(panorama, 0, 0, span, H);
+      } else {
+        ctx.drawImage(panorama, x, 0, span, H);
+      }
+      ctx.restore();
+    }
+    ctx.filter = "none";
+  }
   function render() {
+    if (panorama.complete && panorama.naturalWidth) {
+      paintPanorama();
+      return;
+    }
     ctx.fillStyle = evening ? "#d7a286" : "#c5dce0";
     ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = evening ? "#efc184" : "#f2df9f";
@@ -927,7 +981,7 @@ function train() {
     "train-time",
     () => {
       evening = $("#train-time").value === "evening";
-      dirty = true;
+      render();
     },
     "change",
   );
@@ -943,6 +997,7 @@ function train() {
   raf = requestAnimationFrame(frame);
   return () => {
     alive = false;
+    panorama.onload = null;
     cancelAnimationFrame(raf);
   };
 }
@@ -997,19 +1052,19 @@ function route(event) {
     } else {
       const rules = {
         seats:
-          "Seat four passengers without upsetting anyone. Read their requests, choose a passenger, then choose a seat.",
+          "Read the requests, then choose a seat for each of the four passengers.",
         masala:
-          "Combine two things. Discover something new. Put it back in the bowl.",
+          "Mix two ingredients. Use what you discover to make the next thing.",
         society:
-          "You only wanted to visit a friend. The visitor desk would like a word. And then several more.",
-        city: "Build a little property empire against the computer. Sixteen rounds. Highest net worth wins.",
+          "Write a visitor message that meets every rule the society adds.",
+        city: "Buy property and collect rent. Highest net worth after sixteen rounds wins.",
         spend:
           "You have one crore rupees to spend. Buy, sell, and see how far it goes.",
         cricket:
-          "Bowl a ball. Time your swing. Keep it out of the neighbour’s window.",
+          "Time your swing across six balls. Keep it out of the neighbour’s window.",
         chai: "Read the order. Put the ticket away. Brew it from memory.",
         bargain:
-          "Three stalls. ₹1,500 in your pocket. How good is your last price?",
+          "Bargain at three stalls with ₹1,500 in your pocket.",
         dabba: "Twelve dabbas. Six matching lunches. Open two at a time.",
         roti: "Draw one closed circle on the tawa. Let’s see how round your roti really is.",
         train: "Claim the window seat. Let the countryside do its thing.",
