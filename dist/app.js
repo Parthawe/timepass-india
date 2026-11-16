@@ -10,7 +10,7 @@ import {
   bargainOffer,
   shuffled,
 } from "./engine.js";
-import { svg, icon, food } from "./art.js";
+import { svg, icon } from "./art.js";
 import { createMoreGames } from "./more-games.js";
 import {
   createCricket,
@@ -549,8 +549,25 @@ function dabba() {
   const render = () => {
     const done = matched.size === 12;
     if (done) best("dabba", moves, true);
+    const cards = deck.map((name, i) => {
+      const paired = matched.has(i);
+      const open = flipped.includes(i);
+      const state = paired ? "matched" : open ? "flipped" : "";
+      const label = paired ? name + ", matched" : open ? name : "closed";
+      return `
+        <button id="dabba-${i}" class="memory-card ${state}"
+          aria-label="Dabba ${i + 1}: ${label}"
+          aria-disabled="${paired || open || busy}">
+          ${paired || open
+            ? `<span class="dabba-food" aria-hidden="true">
+                <img src="./assets/scenes/dabba/${name}.webp" width="224" height="224" alt="">
+                <span>${name}</span>
+              </span>`
+            : `<span class="dabba-number" aria-hidden="true">${i + 1}</span>`}
+        </button>`;
+    }).join("");
     mount(
-      `<div class="status"><span><span class="muted">MOVES</span><br><strong>${moves}</strong></span><span class="muted">${matched.size / 2} of 6 pairs found<br>Best: ${best("dabba") || "—"} moves</span></div><div class="memory-grid">${deck.map((name, i) => `<button id="dabba-${i}" class="memory-card ${flipped.includes(i) ? "flipped" : ""} ${matched.has(i) ? "matched" : ""}" aria-label="Dabba ${i + 1}${flipped.includes(i) || matched.has(i) ? ": " + name : ": closed"}" ${matched.has(i) || busy || flipped.includes(i) ? "disabled" : ""}>${flipped.includes(i) || matched.has(i) ? food(name) : `<span class="dabba-number" aria-hidden="true">${i + 1}</span>`}</button>`).join("")}</div><p class="feedback" role="status">${note}</p>${done ? `<div class="result"><h2>Lunch is sorted.</h2><p>All six pairs in ${moves} moves.</p><button id="reset">Shuffle the dabbas</button></div>` : '<div class="actions"><button id="reset">Shuffle & start again</button></div>'}`,
+      `<div class="status"><span><span class="muted">MOVES</span><br><strong>${moves}</strong></span><span class="muted">${matched.size / 2} of 6 pairs found<br>Best: ${best("dabba") || "—"} moves</span></div><div class="memory-grid">${cards}</div><p class="feedback" role="status">${note}</p>${done ? `<div class="result"><h2>Lunch is sorted.</h2><p>All six pairs in ${moves} moves.</p><button id="reset">Shuffle the dabbas</button></div>` : '<div class="actions"><button id="reset">Shuffle & start again</button></div>'}`,
     );
     deck.forEach((name, i) =>
       on("dabba-" + i, () => {
@@ -682,8 +699,29 @@ function roti() {
     last = performance.now(),
     active = true;
   const render = () => {
+    const timing = mode === "timing";
+    const record = timing ? "Timing best: " + best("roti-timing") : "Personal best: " + best("roti");
+    const timingPanel = `
+      <div class="panel roti-timing">
+        <div class="roti-prep" aria-hidden="true"></div>
+        <div class="roti-timing-controls">
+          <p>Stop the marker in the centre to roll an even roti.</p>
+          <div class="timing-track" aria-hidden="true">
+            <div class="zone"></div><div class="sweet"></div>
+            <div class="marker" id="roti-marker" style="left:${position * 100}%"></div>
+          </div>
+          <button id="stop-roti" class="primary">Finish the roti</button>
+        </div>
+      </div>`;
     mount(
-      `<div class="status"><span><span class="muted">ROUNDNESS</span><br><strong id="roti-score">${score === null ? "Your move" : score + "%"}</strong></span><span class="muted">Personal best: ${best("roti")}%</span></div>${mode === "draw" ? `<div class="roti-wrap"><canvas id="roti-canvas" width="500" height="500" aria-label="Draw a closed roti with your pointer or touch. Keyboard players can switch to timing mode."></canvas><span id="roti-hint" class="roti-hint">Draw one round roti.<br>Finish where you started.</span></div>` : `<div class="panel"><div class="chai-art">${food("roti")}</div><p style="text-align:center">Stop the marker in the centre to roll an even roti.</p><div class="timing-track" aria-hidden="true"><div class="zone"></div><div class="sweet"></div><div class="marker" id="roti-marker"></div></div><div class="actions"><button id="stop-roti" class="primary">Finish the roti</button></div></div>`}<p class="feedback" id="roti-feedback" role="status">${score === null ? "A little wonky is still delicious." : score >= 90 ? "That belongs in a geometry textbook." : score >= 65 ? "Pretty round. Definitely edible." : "An interesting new map. Still a roti."}</p><div class="actions"><button id="reset">Try a fresh roti</button><button id="mode">${mode === "draw" ? "Use keyboard timing mode" : "Draw with touch or pointer"}</button></div><p class="fineprint">Drawing scores measure roundness, coverage and how well the ends meet. Timing mode measures accuracy. Personal bests are stored separately for each mode.</p>`,
+      `<div class="status"><span><span class="muted">${timing ? "TIMING" : "ROUNDNESS"}</span><br><strong id="roti-score">Your move</strong></span><span id="roti-best" class="muted">${record}%</span></div>
+      ${timing ? timingPanel : `<div class="roti-wrap">
+        <canvas id="roti-canvas" width="500" height="500" aria-label="Draw a closed roti with your pointer or touch. Keyboard players can switch to timing mode."></canvas>
+        <span id="roti-hint" class="roti-hint">Draw one round roti.<br>Finish where you started.</span>
+      </div>`}
+      <p class="feedback" id="roti-feedback" role="status">${timing ? "" : "A little wonky is still delicious."}</p>
+      <div class="actions">${timing ? "" : '<button id="reset">Try a fresh roti</button>'}<button id="mode">${timing ? "Draw with touch or pointer" : "Use keyboard timing mode"}</button></div>
+      <p class="fineprint">Drawing scores measure roundness, coverage and how well the ends meet. Timing mode measures accuracy. Personal bests are stored separately for each mode.</p>`,
     );
     if (mode === "draw") {
       const c = $("#roti-canvas"),
@@ -741,7 +779,7 @@ function roti() {
         drawing = false;
         score = circleScore(points);
         best("roti", score);
-        $(".status > .muted").textContent =
+        $("#roti-best").textContent =
           "Personal best: " + best("roti") + "%";
         draw();
         $("#roti-score").textContent = score + "%";
@@ -773,18 +811,20 @@ function roti() {
       render();
     });
     on("stop-roti", () => {
+      if (score !== null) {
+        score = null;
+        render();
+        return;
+      }
       score = Math.max(0, Math.round(100 - Math.abs(position - 0.5) * 210));
       best("roti-timing", score);
-      $(".status > .muted").textContent =
+      $("#roti-best").textContent =
         "Timing best: " + best("roti-timing") + "%";
       $("#roti-score").textContent = score + "%";
       $("#roti-feedback").textContent =
-        "Timing score: " + score + "%. Press Try a fresh roti to go again.";
-      $("#stop-roti").disabled = true;
+        "Timing score: " + score + "%.";
+      $("#stop-roti").textContent = "Roll another roti";
     });
-    if (mode === "timing")
-      $(".status .muted:last-child").textContent =
-        "Timing best: " + best("roti-timing") + "%";
   };
   const frame = (t) => {
     const dt = Math.min(50, t - last);

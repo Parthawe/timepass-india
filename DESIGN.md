@@ -10,6 +10,6 @@ Game pages reuse the gallery covers and title type. Bring each cover's palette i
 
 ImageGen artwork in `dist/assets/scenes/` is used inside all eleven games. Cricket draws the ball, bat and stumps over the court. Train Window scrolls a countryside panorama, with the canvas drawing as a fallback. The chai counter sits beside the live order ticket.
 
-Seat, Please has a railway window above the seating chart. Masala Lab and Society Pass put their worktop and register beside the inputs. City Tycoon uses felt inside the board. Spend a Crore shows all nine products, and the bazaar changes its photograph at each stall. Dabba Memory uses steel lids for closed tiles, and Perfect Roti draws the user's line over the iron tawa.
+Seat, Please has a railway window above the seating chart. Masala Lab shows the pantry staples as players select them, and Society Pass puts a visitor register beside the form. City Tycoon uses felt inside the board. Spend a Crore shows all nine products, and the bazaar changes its photograph at each stall. Dabba Memory opens steel lids to reveal labelled food photos. Perfect Roti uses an iron tawa in drawing mode and a wooden rolling board in timing mode.
 
 Preserve keyboard focus, touch targets, reduced-motion behavior and readable contrast. The About & data and source links are in the footer.

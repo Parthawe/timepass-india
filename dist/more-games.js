@@ -138,8 +138,15 @@ export function createMoreGames({ mount, on, $ }) {
       const count = known.length - labBase.length,
         nextHint = labHint(known),
         all = count === labRecipes.length;
+      const slots = [0, 1].map((i) => {
+        const ingredient = selected[i];
+        const photo = labBase.includes(ingredient)
+          ? `<img src="./assets/scenes/ingredients/${ingredient}.webp" width="160" height="160" alt="">`
+          : "";
+        return `<div class="mix-slot">${photo}<span>${ingredient ? labNames[ingredient] : "Pick ingredient " + (i + 1)}</span></div>`;
+      }).join('<span class="mix-plus" aria-hidden="true">+</span>');
       mount(
-        `<div class="status"><span><span class="muted">DISCOVERIES</span><br><strong>${count} / ${labRecipes.length}</strong></span><span class="muted">${known.length} things in your kitchen</span></div><section class="mixing-bench" aria-label="Mix ingredients"><div class="lab-worktop"><div class="lab-counter" aria-hidden="true"></div><div class="mixing-slots">${[0, 1].map((i) => `<div class="mix-slot">${selected[i] ? labNames[selected[i]] : "Pick ingredient " + (i + 1)}</div>`).join('<span class="mix-plus" aria-hidden="true">+</span>')}</div></div><div class="actions"><button class="primary" id="mix" ${selected.length !== 2 ? "disabled" : ""}>Mix them</button><button id="clear-mix" ${!selected.length ? "disabled" : ""}>Clear the bowl</button><button id="lab-hint">${hint ? "Hide hint" : "Nudge me"}</button></div><p class="feedback" role="status">${note}</p>${hint && nextHint ? `<p class="hint-text">Try ${labNames[nextHint[0]]} + ${labNames[nextHint[1]]}.</p>` : ""}</section><div class="ingredient-shelf" aria-label="Available ingredients">${known.map((id) => `<button id="lab-${id}" class="ingredient-chip ${labBase.includes(id) ? "base" : ""}" aria-pressed="${selected.includes(id)}">${labNames[id]}</button>`).join("")}</div>${all ? '<div class="result" role="status"><h2>The kitchen is full.</h2><p>You found all 21 combinations. Your discoveries stay on this device until you reset them.</p></div>' : ""}${
+        `<div class="status"><span><span class="muted">DISCOVERIES</span><br><strong>${count} / ${labRecipes.length}</strong></span><span class="muted">${known.length} things in your kitchen</span></div><section class="mixing-bench" aria-label="Mix ingredients"><div class="lab-worktop"><div class="lab-counter" aria-hidden="true"></div><div class="mixing-slots">${slots}</div></div><div class="actions"><button class="primary" id="mix" ${selected.length !== 2 ? "disabled" : ""}>Mix them</button><button id="clear-mix" ${!selected.length ? "disabled" : ""}>Clear the bowl</button><button id="lab-hint">${hint ? "Hide hint" : "Nudge me"}</button></div><p class="feedback" role="status">${note}</p>${hint && nextHint ? `<p class="hint-text">Try ${labNames[nextHint[0]]} + ${labNames[nextHint[1]]}.</p>` : ""}</section><div class="ingredient-shelf" aria-label="Available ingredients">${known.map((id) => `<button id="lab-${id}" class="ingredient-chip ${labBase.includes(id) ? "base" : ""}" aria-pressed="${selected.includes(id)}">${labNames[id]}</button>`).join("")}</div>${all ? '<div class="result" role="status"><h2>The kitchen is full.</h2><p>You found all 21 combinations. Your discoveries stay on this device until you reset them.</p></div>' : ""}${
           history.length
             ? `<section class="lab-notebook"><h2 class="subheading">This session’s notebook</h2>${history
                 .slice(-5)
@@ -152,6 +159,7 @@ export function createMoreGames({ mount, on, $ }) {
       for (const id of known)
         on("lab-" + id, () => {
           selected = selected.length === 2 ? [id] : [...selected, id];
+          note = selected.length === 2 ? "Ready to mix." : "Pick one more ingredient.";
           render();
           if (selected.length === 2) $("#mix").focus({ preventScroll: true });
         });
