@@ -2859,8 +2859,13 @@ footer {
 }
 
 @media (min-width: 651px) {
+  .game-intro {
+    position: relative;
+  }
   .game-intro img {
-    max-height: 152px;
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 40%;
   }
   .game-intro h1 {
     font-size: clamp(37px, 4.7vw, 54px);
