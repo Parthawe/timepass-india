@@ -8,6 +8,8 @@ Cover art comes from an original ImageGen sheet and is served as individual comp
 
 Game pages reuse the gallery covers and title type. Bring each cover's palette into the parts people use: blue for railway seats, cream and red for the visitor form, green for the property board. Keep state labels, rules and controls separate from the artwork. The navigation and recommendations connect the games back to the gallery.
 
-New ImageGen scenes in `dist/assets/scenes/` supply the gully cricket court, the moving Train Window panorama and the Chai Tapri counter. Cricket draws the ball, bat and stumps over the court. Train Window scrolls the panorama, with the canvas drawing as a fallback. The chai image sits beside the live order ticket.
+ImageGen artwork in `dist/assets/scenes/` is used inside all eleven games. Cricket draws the ball, bat and stumps over the court. Train Window scrolls a countryside panorama, with the canvas drawing as a fallback. The chai counter sits beside the live order ticket.
+
+Seat, Please has a railway window above the seating chart. Masala Lab and Society Pass put their worktop and register beside the inputs. City Tycoon uses felt inside the board. Spend a Crore shows all nine products, and the bazaar changes its photograph at each stall. Dabba Memory uses steel lids for closed tiles, and Perfect Roti draws the user's line over the iron tawa.
 
 Preserve keyboard focus, touch targets, reduced-motion behavior and readable contrast. The About & data and source links are in the footer.

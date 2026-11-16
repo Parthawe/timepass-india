@@ -2501,6 +2501,13 @@ footer {
   background: var(--play-surface);
   border-color: var(--play-rule);
 }
+.coach-window {
+  height: clamp(60px, 8vw, 104px);
+  margin-bottom: 10px;
+  border: 1px solid #52728c;
+  border-radius: 7px;
+  background: #52728c url("./assets/scenes/coach-window.webp") center / cover;
+}
 .view-seats .coach-direction {
   color: #304f66;
 }
@@ -2515,6 +2522,8 @@ footer {
 }
 .view-seats .seat-requests .feedback {
   min-height: 0;
+  padding: 10px 12px;
+  border-radius: 5px;
   background: var(--play-surface);
 }
 .view-masala {
@@ -2522,8 +2531,31 @@ footer {
   --play-surface: #faf0d7;
   --play-rule: #c9a566;
 }
-.view-masala .mix-slot {
+.view-masala .mixing-bench {
+  padding: 12px;
+  border: 1px solid var(--play-rule);
+  border-radius: 7px;
   background: var(--play-surface);
+}
+.lab-worktop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 12px;
+}
+.lab-counter {
+  min-height: 108px;
+  border-radius: 6px;
+  background: #725238 url("./assets/scenes/masala-counter.webp") center / cover;
+}
+.view-masala .mixing-slots {
+  grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1fr);
+  gap: 8px;
+}
+.view-masala .mix-slot {
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  background: #fffaf0;
   border-color: var(--play-rule);
   color: var(--play-accent);
   border-radius: 10px;
@@ -2553,6 +2585,22 @@ footer {
   font-size: 17px;
   color: #671f1c;
 }
+.pass-intake {
+  display: grid;
+  grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+  margin-bottom: 13px;
+}
+.pass-intake p {
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+.visitor-desk {
+  min-height: 72px;
+  border-radius: 5px;
+  background: #b99470 url("./assets/scenes/visitor-desk.webp") center / cover;
+}
 .view-society .pass-form textarea {
   border-color: var(--play-rule);
 }
@@ -2567,12 +2615,20 @@ footer {
   border: 5px solid #263f34;
   gap: 2px;
 }
+.view-city .property:not(.owned-0):not(.owned-1) {
+  background: #f5e9cc;
+}
 .view-city .board-center {
-  background: #e2e9d6;
+  color: #fff3d4;
+  background: #1d4736 url("./assets/scenes/tycoon-felt.webp") center / cover;
 }
 .view-city .board-center h2 {
   font-family: Georgia, serif;
-  color: #173f2f;
+  color: inherit;
+}
+.view-city .die {
+  background: #fff3d4;
+  color: #1d4736;
 }
 .view-city .city-player {
   border-color: #b7c4ad;
@@ -2582,17 +2638,28 @@ footer {
   --play-accent: #225741;
 }
 .view-spend .money-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(64px, 160px) auto;
   background: #e6eddb;
   border-color: #acb99e;
+}
+.crore-ledger {
+  align-self: stretch;
+  min-height: 56px;
+  border-radius: 4px;
+  background: #a2af8c url("./assets/scenes/crore-ledger.webp") center / cover;
 }
 .view-spend .balance {
   color: #1c5039;
   font-family: Georgia, serif;
 }
-.view-spend .item-art {
+.shop-photo {
+  display: block;
+  width: min(100%, 150px);
+  height: auto;
+  margin: 0 auto 10px;
   background: #f4eee0;
   border-radius: 6px;
-  padding: 9px;
 }
 .view-spend .receipt {
   background: #f8f2e7;
@@ -2685,9 +2752,43 @@ footer {
   background: var(--play-surface);
 }
 .view-bargain .bargain-quote {
+  margin: 0;
+  text-align: left;
   color: var(--play-accent);
   font-size: clamp(22px, 3.5vw, 32px);
   letter-spacing: -.03em;
+}
+.bazaar-stall {
+  display: grid;
+  align-items: start;
+  grid-template-columns: minmax(90px, 1fr) minmax(0, 1.5fr);
+  grid-template-areas: "stock price" "stock offer";
+  column-gap: clamp(10px, 3vw, 24px);
+}
+.bazaar-stock {
+  grid-area: stock;
+  align-self: center;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  background: #e8ac87;
+}
+.bazaar-price {
+  grid-area: price;
+  align-self: center;
+}
+.bazaar-price > strong {
+  display: block;
+  font-size: 22px;
+  color: var(--play-accent);
+}
+.bazaar-price > p {
+  margin-block: 1px 0;
+  font-size: 13px;
+}
+.bazaar-offer {
+  grid-area: offer;
+  min-width: 0;
 }
 .view-dabba {
   --play-accent: #694815;
@@ -2695,10 +2796,35 @@ footer {
 .view-dabba .memory-card {
   background: #efce82;
   border-color: #b88946;
+  height: auto;
+  aspect-ratio: 1;
 }
-.view-dabba .memory-card .back-pattern {
-  color: #624410;
-  border-color: #a47738;
+.view-dabba .memory-grid {
+  max-width: 510px;
+  margin-inline: auto;
+}
+.view-dabba .memory-card:not(.flipped, .matched) {
+  background: #9b6729 url("./assets/scenes/dabba-lids.webp") center / cover;
+}
+.view-dabba .memory-card:not(.flipped, .matched):hover:not(:disabled) {
+  border-color: #2d1a0b;
+}
+.dabba-number {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  min-width: 19px;
+  padding-inline: 3px;
+  border-radius: 3px;
+  background: #332314;
+  color: #fff4d8;
+  font-size: 11px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+.view-dabba .memory-card svg {
+  width: min(80px, 100%);
+  height: auto;
 }
 .view-dabba .memory-card.flipped {
   background: #fff7e5;
@@ -2711,14 +2837,14 @@ footer {
   --play-accent: #754726;
 }
 .view-roti .roti-wrap {
+  max-width: 390px;
   background: #e7c79e;
   border: 1px solid #c9a47d;
   border-radius: 10px;
   padding: clamp(9px, 2vw, 18px);
 }
 .view-roti .roti-wrap canvas {
-  background-color: #282522;
-  border-color: #171715;
+  background: #282522 url("./assets/scenes/roti-tawa.webp") center / cover;
 }
 .view-train {
   --play-accent: #1b553d;
@@ -2733,6 +2859,12 @@ footer {
 }
 
 @media (min-width: 651px) {
+  .game-intro img {
+    max-height: 152px;
+  }
+  .game-intro h1 {
+    font-size: clamp(37px, 4.7vw, 54px);
+  }
   .view-chai .game-intro,
   .view-society .game-intro,
   .view-dabba .game-intro,
@@ -2751,6 +2883,31 @@ footer {
   }
 }
 @media (max-width: 650px) {
+  .view-spend .money-header {
+    grid-template-columns: minmax(0, 1fr) minmax(52px, 25%);
+  }
+  .view-spend .batch-control {
+    grid-column: 1 / -1;
+  }
+  .bazaar-stall {
+    grid-template-columns: minmax(70px, 26%) minmax(0, 1fr);
+    grid-template-areas: "stock price" "offer offer";
+    padding: 14px;
+  }
+  .lab-worktop {
+    grid-template-columns: minmax(55px, 25%) minmax(0, 1fr);
+    gap: 7px;
+  }
+  .lab-counter {
+    min-height: 76px;
+  }
+  .view-masala .mix-slot {
+    min-height: 68px;
+    font-size: 13px;
+  }
+  .pass-intake p {
+    font-size: 13px;
+  }
   .play-page .shell {
     padding-inline: 14px;
   }
